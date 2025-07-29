@@ -1,0 +1,30 @@
+# Maintainer: Your Name <you@example.com>
+pkgname=libfprint-git
+pkgver=1.94.9.3.gda422689
+pkgrel=1
+pkgdesc="Library for fingerprint reader support (Git version) with GTK demo app"
+arch=(x86_64)
+url="https://gitlab.freedesktop.org/libfprint/libfprint"
+license=(LGPL2.1+)
+depends=(glibc nss pixman)
+makedepends=(git meson ninja gtk-doc gobject-introspection vala gtk4)
+provides=(libfprint)
+conflicts=(libfprint)
+source=("git+https://gitlab.freedesktop.org/libfprint/libfprint.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd libfprint
+  git describe --long --tags | sed 's/^v//;s/-/./g'
+}
+
+build() {
+  cd libfprint
+  arch-meson build -Dgtk-examples=true
+  meson compile -C build
+}
+
+package() {
+  cd libfprint
+  meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,6 @@
+[Test]
+Type=session
+# We can't use TestEnvironment as per
+#  https://gitlab.gnome.org/GNOME/gnome-desktop-testing/-/issues/1
+Exec=env G_DEBUG=fatal-warnings G_MESSAGES_DEBUG=all G_TEST_SRCDIR=/home/natalie/fprint_gui/src/libfprint/tests G_TEST_BUILDDIR=/home/natalie/fprint_gui/src/libfprint/build/tests FP_DEVICE_EMULATION=1 FP_DRIVERS_ALLOWLIST=virtual_image:virtual_device:virtual_device_storage FP_PRINTS_PATH=/home/natalie/fprint_gui/src/libfprint/examples/prints G_TEST_SRCDIR=/usr/share/installed-tests/libfprint-2 G_TEST_BUILDDIR=/usr/lib/installed-tests/libfprint-2 /usr/lib/installed-tests/libfprint-2/test-fpi-assembling
+TestEnvironment=LD_LIBRARY_PATH=/usr/lib
